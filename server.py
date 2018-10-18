@@ -77,6 +77,8 @@ def piechart(odr, name):
   plt.subplots_adjust(left=0,right=0.7)
   plt.axis('equal') 
   plt.savefig(name,bbox_inches='tight',pad_inches=0.05)
+  plt.close()
 
+  
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0" ,port=80)
