@@ -10,7 +10,7 @@ colorama==0.3.7
 command-not-found==0.3
 configobj==5.0.6
 constantly==15.1.0
-cryptography==2.1.4
+cryptography>=2.3
 distro-info==0.18
 Flask==1.0.2
 Flask-Cors==3.0.6
@@ -31,7 +31,7 @@ oauthlib==2.0.6
 PAM==0.4.2
 pyasn1==0.4.2
 pyasn1-modules==0.2.1
-pycrypto==2.6.1
+pycrypto
 pygobject==3.26.1
 PyJWT==1.5.3
 pyOpenSSL==17.5.0
