@@ -12,13 +12,13 @@ from collections import Counter, OrderedDict
 from math import pi
 import pandas as pd
 import matplotlib.pyplot as plt
-import secrets
+import random
 import os
 import base64
 # import cgi
 
 app = Flask(__name__)
-model = keras.models.load_model('./model/sample_model.h5')
+model = keras.models.load_model('./model/sample_model_2.h5')
 global graph
 graph = tf.get_default_graph()
 imsize = 64
@@ -56,7 +56,7 @@ def run():
     odr = {'Twitter': ret[0], 'Instagram': ret[1], 'Facebook': ret[2]}
     # odr = OrderedDict(sorted(dic.items(), key=lambda x: x[1]))
     print(odr)
-    name = secrets.token_urlsafe(32) + '.png'
+    name = str(random.randint(10000000,99999999)) + '.png'
     piechart(odr, name)
     result_b64 = base64.encodestring(open(name, 'rb').read())
     os.remove(name)
@@ -79,4 +79,4 @@ def piechart(odr, name):
   plt.savefig(name,bbox_inches='tight',pad_inches=0.05)
 
 if __name__ == "__main__":
-    app.run(debug=True,host="0.0.0.0" ,port=8000)
+    app.run(debug=True,host="0.0.0.0" ,port=8001)
