@@ -48,7 +48,7 @@ def run():
   if img_b64:
     img = Image.open(BytesIO(a2b_base64(img_b64))).convert('RGB')
     img = img.resize((imsize,imsize))
-    img = np.array(img, np.uint8).reshape((1, 64, 64, 3))/255.
+    img = np.array(img, np.uint8).reshape((1, imsize, imsize, 3))/255.
     print(img.min(), img.max())
     with graph.as_default():
       ret = model.predict(img)
@@ -79,4 +79,4 @@ def piechart(odr, name):
   plt.savefig(name,bbox_inches='tight',pad_inches=0.05)
 
 if __name__ == "__main__":
-    app.run(debug=True,host="0.0.0.0" ,port=8001)
+    app.run(debug=False,host="0.0.0.0" ,port=80)
