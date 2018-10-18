@@ -18,12 +18,12 @@ import base64
 # import cgi
 
 app = Flask(__name__)
-model = keras.models.load_model('./model/sample_model_2.h5')
+model = keras.models.load_model('./model/sample_model_5.h5')
 global graph
 graph = tf.get_default_graph()
 imsize = 64
 plt.style.use('ggplot')
-plt.rcParams.update({'font.size':15})
+plt.rcParams.update({'font.size': 15})
 
 @app.after_request
 def after_request(response):
@@ -56,7 +56,7 @@ def run():
     odr = {'Twitter': ret[0], 'Instagram': ret[1], 'Facebook': ret[2]}
     # odr = OrderedDict(sorted(dic.items(), key=lambda x: x[1]))
     print(odr)
-    name = str(random.randint(10000000,99999999)) + '.png'
+    name = str(random.randint(10000000, 99999999)) + '.png'
     piechart(odr, name)
     result_b64 = base64.encodestring(open(name, 'rb').read())
     os.remove(name)
@@ -79,4 +79,4 @@ def piechart(odr, name):
   plt.savefig(name,bbox_inches='tight',pad_inches=0.05)
 
 if __name__ == "__main__":
-    app.run(debug=False,host="0.0.0.0" ,port=80)
+    app.run(debug=False, host="0.0.0.0" ,port=80)
