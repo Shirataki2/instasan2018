@@ -79,4 +79,4 @@ def piechart(odr, name):
   plt.savefig(name,bbox_inches='tight',pad_inches=0.05)
 
 if __name__ == "__main__":
-    app.run(debug=True,host="0.0.0.0" ,port=8001)
+    app.run(debug=True,host="0.0.0.0" ,port=40001)
