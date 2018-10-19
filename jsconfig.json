@@ -2,8 +2,4 @@
   "compilerOptions": {
     "target": "ES6"
   },
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/bower_components": true
-  },
 }

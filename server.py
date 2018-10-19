@@ -2,12 +2,13 @@ from flask import Flask, jsonify, make_response, send_file
 from flask import request, render_template, abort
 from flask_cors import CORS
 from datetime import datetime
-from PIL import Image
+from PIL import Image, ImageChops
 from io import BytesIO
 from binascii import a2b_base64
 import numpy as np
 import tensorflow as tf
 import keras
+import keras.backend as K
 from collections import Counter, OrderedDict
 from math import pi
 import pandas as pd
@@ -24,6 +25,8 @@ graph = tf.get_default_graph()
 imsize = 64
 plt.style.use('ggplot')
 plt.rcParams.update({'font.size': 15})
+K.set_learning_phase(0)
+layername = 'activation_24'
 
 @app.after_request
 def after_request(response):
@@ -70,6 +73,73 @@ def run():
           }))
 
 
+@app.route('/grad', methods=['POST'])
+def grad():
+  img = request.json['file']
+  img_b64 = str(img).split(',')[1]
+  if img_b64:
+    raw = Image.open(BytesIO(a2b_base64(img_b64))).convert('RGB')
+    npraw = np.array(raw, np.uint8)
+    img = np.asarray(raw.resize((imsize, imsize))).reshape((1, imsize, imsize, 3))/255.
+    gra = GradCam(model, img, layername)
+    gra = gra.resize(raw.size, Image.BILINEAR)
+    gra.save('a.png')
+    d = Image.fromarray((.3*npraw).astype(np.uint8))
+    d.save('b.png')
+    comp = ImageChops.screen(d, gra)
+    comp.save('c.png')
+    name = str(random.randint(10000000, 99999999)) + '.png'
+    comp.save(name)
+    result_b64 = base64.encodestring(open(name, 'rb').read())
+    os.remove(name)
+    return make_response(jsonify({
+      "img": str(result_b64.decode('utf8')),
+      "width": comp.size[0],
+      "height": comp.size[1],
+    }))
+
+  return make_response(jsonify({
+            "result": "grad::Error",
+          }))
+
+def GradCam(input_model, x, layer_name):
+  '''
+  Args:
+     input_model: モデルオブジェクト
+     x: 画像(array)
+     layer_name: 畳み込み層の名
+  Returns:
+     jetcam: 影響の大きい箇所を色付けした画像(array
+  '''
+  
+  X = x.astype('float32')
+  preprocessed_input = X 
+  print(preprocessed_input.max())
+  
+  imgs = []
+  for i in [1, 2, 0]:
+    with graph.as_default():
+
+      class_output = model.output[:, i]
+
+      conv_output = model.get_layer(layer_name).output   # layer_nameのレイヤーのアウトプット
+      grads = K.gradients(class_output, conv_output)[0]  # gradients(loss, variables) で、variablesのlossに関しての勾配を返す
+      gradient_function = K.function([model.input], [conv_output, grads])  # model.inputを入力すると、conv_outputとgradsを出力する関数
+
+      output, grads_val = gradient_function([preprocessed_input])
+      output, grads_val = output[0], grads_val[0]
+
+      # 重みを平均化して、レイヤーのアウトプットに乗じる
+      weights = np.mean(grads_val, axis=(0, 1))
+      cam = np.dot(output, weights)
+      imgs.append(cam)
+  
+  imgs = np.array(imgs).transpose((1,2,0))
+  
+  img = (255*(np.maximum(imgs, 0) / imgs.max())).astype(np.uint8)
+  img = Image.fromarray(img)
+  return img 
+
 def piechart(odr, name):
   fig = plt.figure(figsize=(8,6))
   plt.pie(list(odr.values()), explode=[0, 0, 0],autopct=lambda p:'{:.1f}%'.format(p) if p>=5 else '', colors=["#77daff", "#ff82e6", "#8199d1"], shadow=True, startangle=90,counterclock=False)
@@ -79,6 +149,6 @@ def piechart(odr, name):
   plt.savefig(name,bbox_inches='tight',pad_inches=0.05)
   plt.close()
 
-  
+
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0" ,port=80)
+    app.run(debug=True, host="0.0.0.0" ,port=8001)

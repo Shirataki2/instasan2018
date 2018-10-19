@@ -24,7 +24,7 @@
 #droparea {
   position: relative;
   box-sizing: border-box;
-  top: 100px;
+  top: 130px;
   text-align: center;
   color: #fff;
   width: 500px;
@@ -38,9 +38,18 @@
 #drawarea {
   position: relative;
   box-sizing: border-box;
-  top: 100px;
+  top: 130px;
   text-align: center;
   margin: 0 auto;
+}
+
+#visbtn, #para{
+  position: relative;
+  box-sizing: border-box;
+  top: 150px;
+  text-align: center;
+  width: 80%;
+  left: 10%;
 }
 
 #droparea-inner {
@@ -80,11 +89,15 @@
 
   ._1200px {
     position: relative;
-    top: 50px;
+    top: 20px;
   }
 
   #drawarea {
     top: 0px;
+  }
+
+  #visbtn, #para {
+    top: 30px;
   }
 
   #droparea-inner {
@@ -122,6 +135,9 @@
 
   #drawarea {
     top: 0px;
+  }
+  #visbtn, #para {
+    top: 20px;
   }
 
   #droparea-inner {
