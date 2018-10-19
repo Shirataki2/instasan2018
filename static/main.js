@@ -130,7 +130,8 @@ const visclick = () => {
   image = new Image();
   gradCam = new Image();
 const b64img = canvas.get(0).toDataURL('image/jpeg');
-visbtn.disabled = true;
+  visbtn.disabled = true;
+  dispLoading("処理中...");
 $.ajax({
     url: 'grad',
     method: 'POST',
@@ -161,5 +162,7 @@ $.ajax({
 //reader.readAsDataURL(file);
 }).fail((e) => {
     console.log(e); 
+  }).always(() => {
+    removeLoading();
 })
 }
