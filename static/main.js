@@ -9,10 +9,10 @@ const getCorrectImsize = () => {
   } else if (w >= 992) {
     return [450, 450];
   } else if (w >= 500) {
-    const l = 385 + (w - 500) / 492 * 65;
+    const l = 385 + (w - 500) / (992 - 450) * (450-350);
     return [l, l];
   } else {
-    return [385, 385];
+    return [350, 350];
   }
 }
 
@@ -60,8 +60,6 @@ $(() => {
     }
 
     reader.onload = function(e) {
-      image = new Image();
-        gradCam = new Image();
       image.onload = function() {
         let w, h;
         
@@ -127,8 +125,6 @@ const getResult = (res) => {
 }
 
 const visclick = () => {
-  image = new Image();
-  gradCam = new Image();
 const b64img = canvas.get(0).toDataURL('image/jpeg');
   visbtn.disabled = true;
   dispLoading("処理中...");

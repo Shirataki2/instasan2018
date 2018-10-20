@@ -19,14 +19,14 @@ import base64
 # import cgi
 
 app = Flask(__name__)
-model = keras.models.load_model('./model/sample_model_5.h5')
+model = keras.models.load_model('./model/sample_model_9.h5')
 global graph
 graph = tf.get_default_graph()
-imsize = 64
+imsize = 128
 plt.style.use('ggplot')
 plt.rcParams.update({'font.size': 15})
 K.set_learning_phase(0)
-layername = 'activation_24'
+layername = 'activation_6'
 
 @app.after_request
 def after_request(response):
@@ -151,4 +151,4 @@ def piechart(odr, name):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0" ,port=8001)
+    app.run(debug=False, host="0.0.0.0" ,port=80)
