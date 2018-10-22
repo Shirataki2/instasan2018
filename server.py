@@ -16,7 +16,6 @@ import matplotlib.pyplot as plt
 import random
 import os
 import base64
-# import cgi
 
 app = Flask(__name__)
 model = keras.models.load_model('./model/sample_model_9.h5')
