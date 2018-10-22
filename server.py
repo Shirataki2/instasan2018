@@ -55,17 +55,21 @@ def run():
     print(img.min(), img.max())
     with graph.as_default():
       ret = model.predict(img)
-    ret = (ret.reshape((3,))*10000).astype(np.int16)/100
-    odr = {'Twitter': ret[0], 'Instagram': ret[1], 'Facebook': ret[2]}
-    # odr = OrderedDict(sorted(dic.items(), key=lambda x: x[1]))
+    ret = list(ret.reshape((3,))*100)
+    odr = [
+      {'label':'Twitter',   "value":float(ret[0])},
+      {'label':'Instagram', "value":float(ret[1])},
+      {'label':'Facebook',  "value":float(ret[2])}
+      ]
+       # odr = OrderedDict(sorted(dic.items(), key=lambda x: x[1]))
     print(odr)
-    name = str(random.randint(10000000, 99999999)) + '.png'
-    piechart(odr, name)
-    result_b64 = base64.encodestring(open(name, 'rb').read())
-    os.remove(name)
+    #name = str(random.randint(10000000, 99999999)) + '.png'
+    #piechart(odr, name)
+    #result_b64 = base64.encodestring(open(name, 'rb').read())
+    #os.remove(name)
     return make_response(jsonify({
-      "img": str(result_b64.decode('utf8')),
-      "result": list(odr.values()),
+      #"img": str(result_b64.decode('utf8')),
+      "result": odr,
     }))
   else:
     return make_response(jsonify({
@@ -150,5 +154,10 @@ def piechart(odr, name):
   plt.close()
 
 
+@app.route('/d3js')
+def d3js():
+  return render_template("d3js.html")
+
+
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0" ,port=80)
+    app.run(debug=True, host="0.0.0.0" ,port=8001)

@@ -86,14 +86,17 @@ $(() => {
            data: JSON.stringify({'file': b64img}),
            contentType: 'application/json',
          })
-            .always((res) => {
-                const pieimg = new Image();
+         .always((res) => {
+                $('#result-image').empty();
+                //const pieimg = new Image();
                 const vbtn = $(`<input type="button" value="どのへんが${getResult(res['result'])}っぽいの？" id="visbtn" class="btn btn-primary btn-lg" onclick="visclick()"/>`);
-                console.log(res['result']);
-                pieimg.src = 'data:image/png;base64,' + res['img'];
-                pieimg.className = 'col-xs-offset-1 col-md-12 col-xs-10 _1200px';
+                const data = res['result'];
+                console.log(data)
+                //pieimg.src = 'data:image/png;base64,' + res['img'];
+                //pieimg.className = 'col-xs-offset-1 col-md-12 col-xs-10 _1200px';
+                drawPie("#result-image", 550, 370, 40, 160, 10, data);
                 const tx = $('<p id="para">Twitter度の高い部分は青く，Instagram度の高い部分は赤く，Facebook度の高い部分は緑になります</p>')
-                $('#result-image').html(pieimg).append(vbtn).append(tx);
+                $('#result-image').append(vbtn).append(tx);
                 visbtn = document.getElementById('visbtn');
                 visbtn.disabled = false;
             })
@@ -114,7 +117,9 @@ function argMax(array) {
 }
 
 const getResult = (res) => {
-    const max = argMax(res);
+    const list = [];
+    res.forEach((i)=>{ list.push(i.value);});
+    const max = argMax(list);
     if (max === 0) {
         return "Twitter";
     } else if (max === 1) {

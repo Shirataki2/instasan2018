@@ -21,6 +21,10 @@
   align-self: center;
 }
 
+#result-field {
+  margin-top: 160px;
+}
+
 #droparea {
   position: relative;
   box-sizing: border-box;
@@ -46,10 +50,14 @@
 #visbtn, #para{
   position: relative;
   box-sizing: border-box;
-  top: 150px;
+  
   text-align: center;
   width: 80%;
   left: 10%;
+}
+
+#para{
+  padding-top: 15px;
 }
 
 #droparea-inner {
@@ -127,7 +135,9 @@
     position: absolute;
     top: 0px;
   }
-
+  #result-field {
+    margin-top: 10px;
+  }
   ._1200px {
     position: relative;
     top: 0px;
@@ -171,7 +181,7 @@
   text-align: center;
   vertical-align: middle;
   padding-top: 140px;
-  background: url("./images/loop2.gif") center center no-repeat;
+  background: url("./images/loop.gif") center center no-repeat;
 }
 
 a a:hover{

@@ -23,46 +23,31 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
+    <script src="./static/d3/d3.js"></script>
   <link rel="stylesheet" href="./static/style.css">
-  <script src="./static/d3/d3.js"></script>
-  <script src="./static/async.js"></script>
   <script src="./static/d3_templates.js"></script>
+  <script src="./static/async.js"></script>
   <script src="./static/main.js"></script>
 </head>
 
 <body>
-  <div class="container">
-    <!-- Header -->
-    <nav class="navbar bg-light logomark">
-      <a href="/">
-        <img src="./static/images/logo.svg" height="30">
-      </a>
-    </nav>
-    <div class="row">
-      <div class="col-md-6 col-xs-12" id="upload-field">
-        <div id="image-upload-section">
-          <label for="f">
-            <div id="droparea" class="visible">
-              <div id="droparea-inner">
-                <i class="far fa-image"></i>
-                <p class="drop-caption">ここをクリックしてアップロード</p>
-                <form action="post" enctype="multipart/form-data">
-                  <input type="file" name="upload_file" style="display:none;" id="f" accept="image/*">
-                </form>
-              </div>
-            </div>
-            <div id="drawarea" class="hidden">
-              <canvas id="canvas"></canvas>
-            </div>
-          </label>
-        </div>
-      </div>
-      <div class="col-md-6 col-xs-12" id="result-field">
-        <div id="result-image">
-        </div>
-      </div>
+    <div id="wrapper">
+
     </div>
-  </div>
+    <script>
+      $(document).ready(() => {
+        const drawDom = "#wrapper";
+        const w = 600, h = 400;
+        const inner = 30, outer = 150, expand = 20;
+        const data = [
+          { "label": "Twitter", "value": 68.156654 },
+          { "label": "Instagram", "value": 24.4544658 },
+          { "label": "Facebook", "value": 0.7474456 }
+        ]
+        drawPie(drawDom, w, h, inner,outer,expand,data)
+          
+      })
+    </script>
 </body>
 
 </html>
