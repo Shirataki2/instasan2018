@@ -157,6 +157,8 @@ def piechart(odr, name):
 def d3js():
   return render_template("d3js.html")
 
-
+@app.route('/.well-known/acme-challenge/j8QbZps6bmjrNolMKrzPsGgo70nYHNcjrKMawPefSMQ')
+def acme():
+  return render_template("j8QbZps6bmjrNolMKrzPsGgo70nYHNcjrKMawPefSMQ.html")
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0" ,port=80)
