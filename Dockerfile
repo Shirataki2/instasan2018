@@ -8,5 +8,6 @@ WORKDIR /app
 RUN pip3 install numpy pillow tensorflow keras flask flask-cors pandas matplotlib
 
 EXPOSE 80
+EXPOSE 443
 
 CMD ["python3", "server.py"]
