@@ -1,0 +1,189 @@
+/* General */
+
+.hidden {
+  opacity: 0.0;
+  display: none;
+}
+
+.visible {
+  opacity: 1.0;
+  display: block;
+}
+
+/* Header */
+.logomark {
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+/* Image Drop Area */
+#upload-field {
+  align-self: center;
+}
+
+#result-field {
+  margin-top: 160px;
+}
+
+#droparea {
+  position: relative;
+  box-sizing: border-box;
+  top: 130px;
+  text-align: center;
+  color: #fff;
+  width: 500px;
+  margin: 0 auto;
+  height: 500px;
+  font-size: 256px;
+  border-radius: 50px;
+  background: #ccc;
+}
+
+#drawarea {
+  position: relative;
+  box-sizing: border-box;
+  top: 130px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#visbtn, #para{
+  position: relative;
+  box-sizing: border-box;
+  
+  text-align: center;
+  width: 80%;
+  left: 10%;
+}
+
+#para{
+  padding-top: 15px;
+}
+
+#droparea-inner {
+  position: relative;
+  top: 10px;
+  width: 480px;
+  margin: 0 auto;
+  height: 480px;
+  border: #fff 5px dashed;
+  border-radius: 50px;
+}
+
+.fa-image {
+  position: relative;
+  top: 35px;
+}
+
+.drop-caption {
+  font-size: 24px;
+}
+
+._1200px {
+  position: relative;
+  top: 120px;
+}
+
+@media screen and (max-width: 1200px) {
+  #droparea {
+    margin: 0 auto;
+    display: block;
+    width: 420px;
+    height: 420px;
+    font-size: 192px;
+    position: relative;
+    top: 0px;
+  }
+
+  ._1200px {
+    position: relative;
+    top: 20px;
+  }
+
+  #drawarea {
+    top: 0px;
+  }
+
+  #visbtn, #para {
+    top: 30px;
+  }
+
+  #droparea-inner {
+    margin: 0 auto;
+    display: block;
+    width: 400px;
+    height: 400px;
+  }
+
+  .drop-caption {
+    font-size: 21px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #upload-field {
+    padding: 320px 50% 0px 50%;
+  }
+
+  #droparea {
+    display: block;
+    left: 50%;
+    width: 320px;
+    height: 320px;
+    margin-left: -160px;
+    font-size: 128px;
+    position: absolute;
+    top: 0px;
+  }
+  #result-field {
+    margin-top: 10px;
+  }
+  ._1200px {
+    position: relative;
+    top: 0px;
+  }
+
+  #drawarea {
+    top: 0px;
+  }
+  #visbtn, #para {
+    top: 20px;
+  }
+
+  #droparea-inner {
+    display: block;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+  }
+
+  .drop-caption {
+    font-size: 16px;
+  }
+}
+
+/* Loading */
+
+#loading {
+  display: table;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #ccc;
+  opacity: 0.8;
+}
+
+#loading .loadingMsg {
+  color: #fff;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 140px;
+  background: url("./images/loop.gif") center center no-repeat;
+}
+
+a a:hover{
+  text-decoration: none;
+}
