@@ -187,3 +187,9 @@
 a a:hover{
   text-decoration: none;
 }
+
+.tweet {
+  position: relative;
+  top: 0;
+  float: right;
+}

@@ -1,7 +1,9 @@
 let visbtn;
 let canvas;
+let tweetImg = $("meta[name='twitter:image']");
 let image = new Image();
 let gradCam = new Image();
+const siteUrl = "http://instasan.kcs18.net"
 const getCorrectImsize = () => {
   let w = $(window).width();
   if (w >= 1200) {
@@ -17,6 +19,13 @@ const getCorrectImsize = () => {
 }
 
 $(() => {
+  $(".tweet").socialbutton("twitter", {
+    button: "horizontal",
+    url: siteUrl,
+    lang: "ja",
+    text: "よっほっほい #インスタさん2018"
+  });
+  tweetImg.attr('content', "https://imgcp.aacdn.jp/img-a/800/auto/aa/gm/article/3/1/8/0/6/201801222224/neko2.jpg")
     let file;
     const droparea = document.getElementById('droparea');
     const drawarea = document.getElementById('drawarea');
@@ -98,7 +107,14 @@ $(() => {
                 const tx = $('<p id="para">Twitter度の高い部分は青く，Instagram度の高い部分は赤く，Facebook度の高い部分は緑になります</p>')
                 $('#result-image').append(vbtn).append(tx);
                 visbtn = document.getElementById('visbtn');
-                visbtn.disabled = false;
+           visbtn.disabled = false;
+           tweetImg.attr('content', `data:image/png;base64,${b64img}`)
+                $(".tweet").socialbutton("twitter", {
+                button: "horizontal",
+                url: siteUrl,
+                lang: "ja",
+                text: "わっほっほい #インスタさん2018"
+          });
             })
             .fail((e) => {
               console.log(e);
