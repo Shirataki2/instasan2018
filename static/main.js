@@ -14,7 +14,7 @@ const getCorrectImsize = () => {
     const l = 385 + (w - 500) / (992 - 450) * (450-350);
     return [l, l];
   } else {
-    return [350, 350];
+    return [w*.95, w*.95];
   }
 }
 
@@ -103,7 +103,8 @@ $(() => {
                 console.log(data)
                 //pieimg.src = 'data:image/png;base64,' + res['img'];
                 //pieimg.className = 'col-xs-offset-1 col-md-12 col-xs-10 _1200px';
-                drawPie("#result-image", 550, 370, 40, 160, 10, data);
+                const w = Math.min(550, $(window).width() * .9);
+                drawPie("#result-image", w, 440/550, w/12, w/3, w/55, data);
                 const tx = $('<p id="para">Twitter度の高い部分は青く，Instagram度の高い部分は赤く，Facebook度の高い部分は緑になります</p>')
                 $('#result-image').append(vbtn).append(tx);
                 visbtn = document.getElementById('visbtn');
