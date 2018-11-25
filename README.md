@@ -2,7 +2,7 @@
 
 慶應義塾大学のサークル[KCS](https://kcs1959.jp)のAIグループが制作した三田祭向けの作品です。
 
-http://instasan.kcs18.net にて体験できます。
+~http://instasan.kcs18.net にて体験できます。~
 
 ## 開発にあたっての環境
 
@@ -14,7 +14,7 @@ http://instasan.kcs18.net にて体験できます。
 
 また、CSSはBootstrapを使用しています。
 
-http://instasan.kcs18.net はGCP上のサービスである[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/)(GKE)を使っています。
+~http://instasan.kcs18.net~ はGCP上のサービスである[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/)(GKE)を使っています。
 
 masterブランチにプッシュすると[Google Cloud Build](https://cloud.google.com/cloud-build/)がDockerfileを基にビルドを行います。そのイメージをGKEに適用することでサービスをデプロイしています。疑似CIもどきです。
 
